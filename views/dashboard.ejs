@@ -1,0 +1,90 @@
+<%- include('partials/header'); %>
+
+<!--Container Main start-->
+<div class="height-100 bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Dashboard</h4>
+            </div>
+        </div>
+        <% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <%= error.msg %>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+              </div>
+          </div>
+            <% }); %> <% } %> <% if(success_msg != ''){ %>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <%= success_msg %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+              
+            <% } %> <% if(error_msg != ''){ %>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <%= error_msg %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <% } %> <% if(error != ''){ %>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <i class="bx bx-user bg-success iconStyle"></i>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase">Total Customers</h5>
+                        <span class="badge bg-success"><?php echo numberOfRecords($conn, "gp_customers"); ?> CUSTOMERS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <i class="bx bx-wrench bg-danger iconStyle"></i>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase">Spare Parts</h5>
+                        <span class="badge bg-danger"><?php echo numberOfRecords($conn, "gp_spareparts"); ?> SPARE PARTS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <i class="bx bx-book bg-warning iconStyle"></i>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase">Bookings</h5>
+                        <span class="badge bg-warning"><?php echo numberOfRecords($conn, "gp_booking"); ?> BOOKINGS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <i class="bx bxs-user-pin bg-info iconStyle"></i>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase">Staff</h5>
+                        <span class="badge bg-info"><?php echo numberOfRecords($conn, "gp_staff"); ?> STAFF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Container Main end-->
+<%- include('partials/footer'); %>

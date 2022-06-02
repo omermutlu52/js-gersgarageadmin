@@ -1,0 +1,110 @@
+<%- include('partials/header'); %>
+
+
+<!--Container Main start-->
+<div class="height-100 bg-light">
+    <div class="container-fluid">
+        <% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <%= error.msg %>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+              </div>
+          </div>
+            <% }); %> <% } %> <% if(success_msg != ''){ %>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <%= success_msg %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+              
+            <% } %> <% if(error_msg != ''){ %>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <%= error_msg %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <% } %> <% if(error != ''){ %>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>PROFILE</h4>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <img src="assets/images/noThumbnail.jpg" class="card-img-top myProfile mb-3" alt="no photo">
+                        </div>
+                        <h5 class="card-title text-center"><%= admin.username %></h5>
+                        <p class="card-text text-center">Menager</p>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>UPDATE PROFILE</h4>
+                            </div>
+                        </div>
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="name" class="form-label">Username:</label>
+                                    <input type="text" name="username" class="form-control form-control-sm mb-2" id="name" placeholder="Type Here" value="<%= admin.username %>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="stock" class="form-label">Password:</label>
+                                    <input type="password" name="password" class="form-control form-control-sm mb-2" id="stock" placeholder="Type Here" value="<%= admin.password %>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="stock" class="form-label">Full Name:</label>
+                                    <input type="text" name="fullname" class="form-control form-control-sm mb-2" id="stock" placeholder="Type Here" value="Omer Mutlu" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Job:</label>
+                                    <input type="text" name="post" class="form-control form-control-sm mb-2" id="name" placeholder="Type Here" value="Menager" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="stock" class="form-label">Email:</label>
+                                    <input type="email" name="email" class="form-control form-control-sm mb-2" id="stock" placeholder="Type Here" value="omermutlu@gmail.com" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="description" class="form-label">Bio:</label>
+                                    <textarea name="bio" class="form-control form-control-sm mb-2" id="description" placeholder="Type Here"></textarea>
+                                </div>
+                                <div class="text-end mt-2">
+                                    <input type="submit" class="btn btn-danger btn-sm" value="UPDATE PROFILE">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Container Main end-->
+<%- include('partials/footer'); %>

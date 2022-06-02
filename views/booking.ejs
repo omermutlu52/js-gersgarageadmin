@@ -1,0 +1,215 @@
+<%- include('partials/header'); %>
+
+<!--Container Main start-->
+
+<div class="height-100 bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <h4><b>BOOKINGS</b></h4>
+                            </div>
+                        </div>
+                        <form method="post">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="form-group bmd-form-group">
+                                        <input name="from" type="date" class="form-control form-control-sm" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bmd-form-group">
+                                        <input name="to" type="date" class="form-control form-control-sm" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bmd-form-group">
+                                        <input name="filter" type="submit" class="btn btn-sm btn-danger pull-right w-100" value="FILTER">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+                            <div class="row">
+                              <div class="col-md-12">
+                                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <%= error.msg %>
+                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
+                              </div>
+                          </div>
+                            <% }); %> <% } %> <% if(success_msg != ''){ %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                      <%= success_msg %>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                              
+                            <% } %> <% if(error_msg != ''){ %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                      <%= error_msg %>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %> <% if(error != ''){ %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                      <%= error %>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+
+                        <div class="table-responsive">
+                            <table class="table table-success table-striped" id="myTable">
+                                <thead class="text-primary">
+                                    <th>SR:</th>
+                                    <th>Customer:</th>
+                                    <th>Vehicle:</th>
+                                    <th>Booking:</th>
+                                    <th>Date:</th>
+                                    <th>Spare Parts:</th>
+                                    <th>Employee:</th>
+                                    <th>Action:</th>
+                                </thead>
+                                <tbody>
+                                    <% let sr=1 %>
+                                    <% booking.forEach(function (booking) { %>
+                                            <tr>
+                                                <td><%= sr %></td>
+                                                <td>
+                                                <%= booking.fname %> <%= booking.lname %><br>
+                                                Email: <%= booking.email %><br>
+                                                Phone #: <%= booking.number %><br>
+                                                </td>
+                                                <td><b><%= booking.vehicle_make %>
+                                                       <%= booking.vehicle_name %>
+                                                       <%= booking.vehicle_model %></b><br>
+                                                    License #:<%= booking.vehicle_lesNumber %> <br>
+                                                    Engine Type:<%= booking.vehicle_engineType %>           
+                                                </td>
+                                                <td>
+                                                    Price: <%= booking.price %> EUROS<br>
+                                                    Service Type: <%= booking.vehicle_bookingType %><br>
+                                                    <b>Decription:</b>
+                                                    <%= booking.description %>
+                                                </td>
+                                                <td>
+                                                    <%= booking.date %>
+                                                </td>
+                                                <td>
+                                                  <%= booking.spare_part %>
+                                                </td>
+                                                 
+                                                <td>
+                                                    <%= booking.staff %>
+
+                                                </td>
+
+                                                <td>
+                                                    <a href="\add-spare?id=<%=booking._id%>" type="button" class="btn btn-info btn-sm me-2">
+                                                        <i class='bx bxs-cart-add'></i>
+                                                    </a>
+                                                    <a href="\add-staff?id=<%=booking._id%>" type="button" class="btn btn-success btn-sm me-2">
+                                                        <i class='bx bxs-user-plus'></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#exampleModal<%= booking._id %>">
+                                                        <i class='bx bx-list-check'></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="addSparePart<%= booking._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">BOOKING DETAILS</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form method="post">
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group bmd-form-group">
+                                                                            <input type="text" name="id" value="<%= booking._id %>" style="display: none;">
+                                                                            <select name="spare-part" class="form-control form-control-sm">
+                                                                                <%  Spare.find({},function(err,data){ %>
+                                                                                    <% data.forEach(function (spare) { %>
+
+                                                                                        <option value="<%= spare %>"><%= spare.name %></option>
+                                                                                        <p> <%= spare %>"></p>
+                                                                                        <% }) %>
+                                                                             <%  }) %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer p-0 m-0">
+                                                                    <input type="submit" name="spare-part" class="btn btn-sm btn-danger pull-right mt-2 me-0" value="ADD SPARE PART">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal<%= booking._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">BOOKING DETAILS</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <ul>
+                                                                <li>User: <%= booking.fname %>
+                                                                    <%= booking.lname %><br>
+                                                                </li>
+                                                                <li>Email: <%= booking.email %></li>
+                                                                <li>Number: <%= booking.number %></li>
+                                                                <li>Vehicle: <%= booking.vehicle_make %>
+                                                                    <%= booking.vehicle_name %>
+                                                                    <%= booking.vehicle_model %></li>
+                                                                <li>Vehicle Type: <%= booking.vehicle_type %></li>
+                                                                <li>License #: <%= booking.vehicle_lesNumber %></li>
+                                                                <li>Engine Type: <%= booking.vehicle_engineType %>
+                                                                </li>
+                                                                <li>Booking Type: <%= booking.vehicle_bookingType %>
+                                                                </li>
+                                                            </ul>
+                                                            <strong>Description:</strong>
+                                                            <p><%= booking.description %></p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% sr+=1 %>
+                                            <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Container Main end-->
+<%- include('partials/footer'); %>

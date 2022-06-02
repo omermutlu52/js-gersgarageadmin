@@ -1,0 +1,80 @@
+<%- include('partials/header'); %>
+
+<!--Container Main start-->
+<div class="height-100 bg-light">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>DELETE STAFF</h4>
+                    </div>
+                </div>
+                <% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+                    <div class="row">
+                      <div class="col-md-12">
+                          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <%= error.msg %>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                      </div>
+                  </div>
+                    <% }); %> <% } %> <% if(success_msg != ''){ %>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <%= success_msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    <% } %> <% if(error_msg != ''){ %>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <%= error_msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %> <% if(error != ''){ %>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <%= error %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                <form  action="/staff-delete" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" name="name" class="form-control form-control-sm mb-2" id="name" placeholder="Type Here" value="<%= staff.name %>" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="pos" class="form-label">JOB:</label>
+                            <input type="text" name="pos" class="form-control form-control-sm mb-2" id="pos" placeholder="Type Here" value="<%= staff.pos %>" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="email" class="form-label">EMAIL:</label>
+                            <input type="text" name="email" class="form-control form-control-sm mb-2" id="email" placeholder="Type Here" value="<%= staff.email %>" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="number" class="form-label">NUMBER:</label>
+                            <input type="text" name="number" class="form-control form-control-sm mb-2" id="number" placeholder="Type Here" value="<%= staff.number %>" disabled>
+                        </div>
+                        <input type="hidden" id="id" name="id" value= <%= staff.id %>>
+
+                        <div class="text-end mt-2">
+                            <input type="submit" class="btn btn-danger btn-sm" value="DELETE STAFF">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer'); %>

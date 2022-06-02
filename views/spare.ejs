@@ -1,0 +1,101 @@
+<%- include('partials/header'); %>
+
+<!--Container Main start-->
+<div class="height-100 bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <h4><b>SPARE PARTS</b></h4>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <a href="/spare-add" class="btn btn-sm btn-danger">NEW SPARE PART</a>
+                            </div>
+                        </div>
+                        <% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+                            <div class="row">
+                              <div class="col-md-12">
+                                  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <%= error.msg %>
+                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
+                              </div>
+                          </div>
+                            <% }); %> <% } %> <% if(success_msg != ''){ %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                      <%= success_msg %>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                              
+                            <% } %> <% if(error_msg != ''){ %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                      <%= error_msg %>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %> <% if(error != ''){ %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                      <%= error %>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        <div class="table-responsive">
+                            <table class="table table-success table-striped" id="myTable">
+                                <thead class="text-primary">
+                                    <th>ID:</th>
+                                    <th>Name:</th>
+                                    <th>Description:</th>
+                                    <th>Stock:</th>
+                                    <th>Price:</th>
+                                    <th>Action:</th>
+                                </thead>
+                                <tbody>
+                                    <% let sr=1 %>
+                                    <% spare.forEach(function (spare) { %>
+                                        
+                                            <tr>
+                                                <td><%= sr %></td>
+                                                <td><%= spare.name %></td>
+                                                <td><%= spare.description %>...</td>
+                                                <td><%= spare.stock %></td>
+                                                <td><%= spare.price %></td>
+                                                <td>
+
+                                                    <a href="\spare-edit?id=<%=spare._id%>" type="button" class="btn btn-warning btn-sm me-2">
+                                                        <i class='bx bx-edit'></i>
+                                                    </a>
+                                                    <a href="\spare-delete?id=<%=spare._id%>" type="button" class="btn btn-danger btn-sm" >
+                                                        <i class='bx bxs-basket'></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                           
+                                            <!-- Modal -->
+                                            
+                                            <% sr+=1 %>
+                                            <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Container Main end-->
+<%- include('partials/footer'); %>

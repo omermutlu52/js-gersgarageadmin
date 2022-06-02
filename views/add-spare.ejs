@@ -1,0 +1,75 @@
+<%- include('partials/header'); %>
+
+<!--Container Main start-->
+<div class="height-100 bg-light">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>ADD SPARE PART</h4>
+                    </div>
+                </div>
+                <% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+                    <div class="row">
+                      <div class="col-md-12">
+                          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <%= error.msg %>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                      </div>
+                  </div>
+                    <% }); %> <% } %> <% if(success_msg != ''){ %>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                              <%= success_msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    <% } %> <% if(error_msg != ''){ %>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <%= error_msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %> <% if(error != ''){ %>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <%= error %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <form action="/add-spare" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group bmd-form-group">
+                                        <input type="text" name="book_id" value="<%= book_id %>" style="display: none;">
+                                        <select name="spare_part" class="form-control form-control-sm">                                            
+                                                <% spare.forEach(function (spare) { %>
+                                                    <option value="<%= spare.name %>"><%= spare.name %> </option>    
+                                                <% }) %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer p-0 m-0">
+                                <input type="submit" class="btn btn-sm btn-danger pull-right mt-2 me-0" value="ADD SPARE PART">
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); %>
